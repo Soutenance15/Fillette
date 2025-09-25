@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
         movePlayerSystem = GetComponent<MovePlayerSystem>();
         if (movePlayerSystem != null)
         {
-            Debug.Log("movePlayerSystem exists");
+            // Debug.Log("movePlayerSystem exists");
         }
     }
 }
