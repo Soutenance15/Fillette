@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class LocomotionSystem : MonoBehaviour
@@ -14,32 +13,54 @@ public class LocomotionSystem : MonoBehaviour
 
     [Header("Jet Settings")]
     public bool enableJet = true;
-    private float jetForce = 0.05f;
-    private float maxFuel = 12f;
-    private float currentFuel;
+    public float jetForceMax = 0.25f; // poussée max au début
+    public float jetForceMin = 0.05f; // poussée minimale (fin de poussée)
+    private float jetDecayNormalSpeed = 2f; // vitesse de croissance/decroissance
+    private float jetDecayControlSpeed = 1 / 20f; // vitesse de croissance/decroissance
+    public float jetStableForce = 0.1f; // poussée constante si Ctrl
+    public float jetRecoverySpeed = 0.5f; // vitesse de recharge du jet
+    public float maxFuel = 12f;
+    public float jetSpeedMax = 10f;
+    public float currentFuel;
+    public float currentJetForce;
+    public Vector2 velocity;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         currentFuel = maxFuel;
+        currentJetForce = jetForceMax;
     }
 
     void Update()
     {
+        // Jump
         if (enableJump && Input.GetButtonDown("Jump") && IsGrounded())
         {
             Jump();
         }
 
+        // Jet
         if (enableJet && Input.GetKey(KeyCode.UpArrow) && currentFuel > 0f)
         {
             Jet();
+            // Ici tu peux réduire currentJetForce si tu veux (diminution progressive à chaque frame)
         }
+        else
+        {
+            // Recharge progressive du jet quand la touche est relâchée
+            currentJetForce = Mathf.MoveTowards(
+                currentJetForce,
+                jetForceMax,
+                jetRecoverySpeed * Time.deltaTime
+            );
+        }
+        velocity = rb.linearVelocity;
     }
 
     void FixedUpdate()
     {
-        if (rb.linearVelocity.y < -10f || rb.linearVelocity.y > 10f)
+        if (rb.linearVelocity.y < -jetSpeedMax || rb.linearVelocity.y > jetSpeedMax)
         {
             LimitVelocity();
         }
@@ -47,10 +68,8 @@ public class LocomotionSystem : MonoBehaviour
 
     void LimitVelocity()
     {
-        // La vitesse verticale ne doit pas depasser 10f ou -10f
-        // des problèmes liés a la physiqye peuvent survenir comme
-        // un effet d'ecrasement
-        float clampedY = Mathf.Clamp(rb.linearVelocity.y, -10f, 10f);
+        // on assure que l'on prend une valeur entre -jetSpeedMax et  jetSpeedMax pour la velocity.y
+        float clampedY = Mathf.Clamp(rb.linearVelocity.y, -jetSpeedMax, jetSpeedMax);
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, clampedY);
     }
 
@@ -62,8 +81,32 @@ public class LocomotionSystem : MonoBehaviour
 
     private void Jet()
     {
-        rb.AddForce(Vector2.up * jetForce, ForceMode2D.Impulse);
-        currentFuel -= Time.deltaTime;
+        // Mode Ctrl : faible poussée mais visible
+        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+        {
+            // currentJetForce = jetStableForce;
+            currentJetForce = Mathf.MoveTowards(
+                currentJetForce,
+                jetForceMin,
+                1 / jetDecayControlSpeed * Time.deltaTime
+            );
+            // Consommation du fuel
+            // Ici on multiplie par 10 car la diminuetion serait trop faible sinon
+            currentFuel -= Time.deltaTime * jetDecayControlSpeed * 10;
+        }
+        else
+        {
+            // Jet normal
+            // décroissance progressive
+            currentJetForce = Mathf.MoveTowards(
+                currentJetForce,
+                jetForceMin,
+                1 / jetDecayNormalSpeed * Time.deltaTime
+            );
+            // Consommation du fuel
+            currentFuel -= Time.deltaTime * jetDecayNormalSpeed;
+        }
+        rb.AddForce(Vector2.up * currentJetForce, ForceMode2D.Impulse);
     }
 
     public void FillFuelJet(float amountFuel)
