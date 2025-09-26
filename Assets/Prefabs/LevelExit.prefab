@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3020954010362822253
+--- !u!1 &2288905346677384851
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5407620706236663442}
-  - component: {fileID: 7405069613694929399}
-  - component: {fileID: 7177943471356791673}
-  - component: {fileID: 5345937526152716699}
+  - component: {fileID: 5236591306756698886}
+  - component: {fileID: 34166156487772498}
+  - component: {fileID: 2067011197547988651}
+  - component: {fileID: 6604462512220438614}
   m_Layer: 0
-  m_Name: Poison
+  m_Name: LevelExit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5407620706236663442
+--- !u!4 &5236591306756698886
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3020954010362822253}
+  m_GameObject: {fileID: 2288905346677384851}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3371657178662978595}
+  - {fileID: 5623361998600819279}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7405069613694929399
+--- !u!212 &34166156487772498
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3020954010362822253}
+  m_GameObject: {fileID: 2288905346677384851}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.8742138, g: 0.05223273, b: 0.05223273, a: 1}
+  m_Color: {r: 0.015723169, g: 0.98985595, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -90,27 +90,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7177943471356791673
+--- !u!114 &2067011197547988651
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3020954010362822253}
+  m_GameObject: {fileID: 2288905346677384851}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a82b8584fbda6a547ab6200399e96c74, type: 3}
+  m_Script: {fileID: 11500000, guid: 31ad47c3ca2554548a32d09dbae51b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hazardDamage: 10
-  damageCooldown: 1
---- !u!61 &5345937526152716699
+  levelManager: {fileID: 0}
+--- !u!61 &6604462512220438614
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3020954010362822253}
+  m_GameObject: {fileID: 2288905346677384851}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -150,7 +149,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &5074879593882180310
+--- !u!1 &3432883346675313592
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,9 +157,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3371657178662978595}
-  - component: {fileID: 4331798335958753693}
-  - component: {fileID: 5152555940183962075}
+  - component: {fileID: 5623361998600819279}
+  - component: {fileID: 3263489652638933750}
+  - component: {fileID: 9092436181921328424}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -168,32 +167,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &3371657178662978595
+--- !u!224 &5623361998600819279
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5074879593882180310}
+  m_GameObject: {fileID: 3432883346675313592}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5407620706236663442}
+  m_Father: {fileID: 5236591306756698886}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.75}
   m_SizeDelta: {x: 4, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!23 &4331798335958753693
+--- !u!23 &3263489652638933750
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5074879593882180310}
+  m_GameObject: {fileID: 3432883346675313592}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -232,13 +231,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5152555940183962075
+--- !u!114 &9092436181921328424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5074879593882180310}
+  m_GameObject: {fileID: 3432883346675313592}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
@@ -252,9 +251,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Poison
-
-'
+  m_text: Sortie
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -326,5 +323,5 @@ MonoBehaviour:
   _SortingLayerID: 0
   _SortingOrder: 0
   m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 4331798335958753693}
+  m_renderer: {fileID: 3263489652638933750}
   m_maskType: 0

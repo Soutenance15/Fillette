@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +24,32 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnEnable()
+    {
+        // S'abonner à l'événement
+        LevelExit.OnLevelCompleted += HandleLevelCompleted;
+    }
+
+    private void OnDisable()
+    {
+        // Se désabonner pour éviter les fuites de mémoire
+        LevelExit.OnLevelCompleted -= HandleLevelCompleted;
+    }
+
+    // Méthode appelée lorsque l'événement est déclenché
+    private void HandleLevelCompleted(string nextLevelName)
+    {
+        if (!string.IsNullOrEmpty(nextLevelName))
+        {
+            Debug.Log("Chargement du niveau : " + nextLevelName);
+            SceneManager.LoadScene(nextLevelName);
+        }
+        else
+        {
+            Debug.LogWarning("GameManager : nextLevelName vide !");
         }
     }
 
@@ -56,5 +83,12 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         uiManager.ShowPausePanel(false);
         Debug.Log("Jeu repris");
+    }
+
+    public void LoadNextLevel(string levelName)
+    {
+        // Si tu veux un petit effet de pause ou animation, tu peux le faire ici
+        Time.timeScale = 1f; // Assure que le jeu n’est pas en pause
+        SceneManager.LoadScene(levelName);
     }
 }
