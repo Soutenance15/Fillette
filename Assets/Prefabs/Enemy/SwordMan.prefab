@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5246667901524616825}
   - component: {fileID: 5550092301995520464}
+  - component: {fileID: 1382616908624002205}
+  - component: {fileID: 2291171989029936615}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: SwordPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,9 +28,9 @@ Transform:
   m_GameObject: {fileID: 421237926652467817}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -0.05, z: 0}
-  m_LocalScale: {x: 0.049999997, y: 0.049999997, z: 0.049999997}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 1, y: -0.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0.049999997}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4900684428964032517}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -87,6 +89,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &1382616908624002205
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421237926652467817}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -0.0000000037252903}
+  m_Radius: 0.5
+--- !u!114 &2291171989029936615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421237926652467817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45babb49bd804914a862ad0723129d93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5573205298119075773
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,14 +149,13 @@ GameObject:
   - component: {fileID: 9070446614713116845}
   - component: {fileID: 9144769994967854086}
   - component: {fileID: 96261018596771121}
-  - component: {fileID: 7654458164976782884}
   - component: {fileID: 6825476581047765317}
   - component: {fileID: 6780315955282890454}
   - component: {fileID: 6885691933865140482}
   - component: {fileID: 2519583901565695459}
   - component: {fileID: 5934417216316233762}
   m_Layer: 0
-  m_Name: Gunner
+  m_Name: SwordMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +223,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.9137255, g: 0.7735573, b: 0.08235291, a: 1}
+  m_Color: {r: 0.08235291, g: 0.41270998, b: 0.9137255, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -247,18 +296,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7654458164976782884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5573205298119075773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f00f4117f721477459939ab7bbf92af6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6825476581047765317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,8 +320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1cdae01a0eecc4c8ba013ebcd38daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  maxSpeed: 3
+  speed: 4.5
+  maxSpeed: 4.5
   groundCheck: {fileID: 1071547489557425868}
   groundCheckRadius: 0.4
   groundLayer:
@@ -303,8 +340,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43200a172b77ef54fadba43db9f61ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 5347817654959006753, guid: 56b38bf2f5ee2754c9e67fb4040093ca, type: 3}
-  firePoint: {fileID: 5246667901524616825}
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
   fireRate: 1
 --- !u!114 &2519583901565695459
 MonoBehaviour:
@@ -332,7 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7342815453e92e649aa1416aabe1932b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 3
+  detectionRange: 1.5
   playerLayer:
     serializedVersion: 2
     m_Bits: 8

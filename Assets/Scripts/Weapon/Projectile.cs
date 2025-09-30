@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
     private float speed = 10f;
 
     [SerializeField]
-    private int damage = 25;
+    private float damage = 12.5f;
 
     [SerializeField]
     private float lifetime = 3f;
@@ -17,6 +17,7 @@ public class Projectile : MonoBehaviour
 
     private void Start()
     {
+        gameObject.layer = LayerMask.NameToLayer("Projectile");
         Destroy(gameObject, lifetime); // auto-destruction apres lifetime (si l'objet n'a rien touché)
     }
 

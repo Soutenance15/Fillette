@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DetectionSystem : MonoBehaviour
 {
-    // [SerializeField]
+    [SerializeField]
     private float detectionRange = 3f; // portée de détection
 
     [SerializeField]

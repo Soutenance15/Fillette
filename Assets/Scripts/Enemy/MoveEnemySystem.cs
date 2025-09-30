@@ -1,5 +1,6 @@
+using System;
+using System.Collections;
 using UnityEngine;
-using System.Collections; 
 
 public class MoveEnemySystem : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class MoveEnemySystem : MonoBehaviour
     private bool facingRight = true; // pour savoir dans quelle direction le perso regarde
 
     DetectionSystem detection;
+
+    public bool patrol;
 
     private void Awake()
     {
@@ -39,6 +42,11 @@ public class MoveEnemySystem : MonoBehaviour
         }
     }
 
+    private bool IsGround()
+    {
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+    }
+
     private void HandlePlayerDetected(Transform player)
     {
         // Si le joueur est de l'autre côté
@@ -51,6 +59,7 @@ public class MoveEnemySystem : MonoBehaviour
             StartCoroutine(IncreaseSpeedDelay(0.5f));
         }
     }
+
     private IEnumerator IncreaseSpeedDelay(float delay)
     {
         speed = 1.5f;
@@ -75,12 +84,7 @@ public class MoveEnemySystem : MonoBehaviour
 
         rb.position = Vector2.MoveTowards(rb.position, targetPos, speed / 10 * Time.fixedDeltaTime);
 
-        bool onGround = Physics2D.OverlapCircle(
-            groundCheck.position,
-            groundCheckRadius,
-            groundLayer
-        );
-        if (!onGround)
+        if (!IsGround())
         {
             Flip();
         }
@@ -92,7 +96,10 @@ public class MoveEnemySystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Patrol();
+        if (patrol)
+        {
+            Patrol();
+        }
     }
 
     private void Flip()

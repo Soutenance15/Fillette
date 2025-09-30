@@ -10,7 +10,7 @@ public class AttackSystem : MonoBehaviour
 
     [SerializeField]
     private float fireRate = 1f;
-    private float nextFireTime = 0f;
+    private float nextAttackTime = 0f;
 
     DetectionSystem detection;
 
@@ -37,10 +37,13 @@ public class AttackSystem : MonoBehaviour
 
     private void HandlePlayerDetected(Transform player)
     {
-        if (Time.time >= nextFireTime)
+        if (Time.time >= nextAttackTime)
         {
-            Shoot();
-            nextFireTime = Time.time + fireRate;
+            if (firePoint != null)
+            {
+                Shoot();
+                nextAttackTime = Time.time + fireRate;
+            }
         }
     }
 

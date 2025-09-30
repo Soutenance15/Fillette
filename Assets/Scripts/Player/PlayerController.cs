@@ -9,11 +9,5 @@ public class PlayerController : MonoBehaviour
     {
         movePlayerSystem = GetComponent<MovePlayerSystem>();
         healthSystem = GetComponent<HealthSystem>();
-        // if (movePlayerSystem != null)
-        // {
-        //     Debug.Log("movePlayerSystem exists");
-        // }
-
-
     }
 }

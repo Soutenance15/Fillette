@@ -11,7 +11,7 @@ public class OnCollisionSystem : MonoBehaviour
             {
                 Vector2 pushDir = collision.transform.position - transform.position;
                 player.movePlayerSystem.PushMe(pushDir, 12f);
-                player.healthSystem.TakeDamage(12.5f);
+                // player.healthSystem.TakeDamage(12.5f);
             }
         }
     }
