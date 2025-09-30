@@ -9,14 +9,37 @@ public class AttackSystem : MonoBehaviour
     private Transform firePoint;
 
     [SerializeField]
-    private float fireRate = 0.5f;
+    private float fireRate = 1f;
     private float nextFireTime = 0f;
 
-    private void Update()
+    DetectionSystem detection;
+
+    private void Awake()
+    {
+        detection = GetComponent<DetectionSystem>();
+    }
+
+    private void OnEnable()
+    {
+        if (detection != null)
+        {
+            detection.OnPlayerDetected += HandlePlayerDetected;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (detection != null)
+        {
+            detection.OnPlayerDetected -= HandlePlayerDetected;
+        }
+    }
+
+    private void HandlePlayerDetected(Transform player)
     {
         if (Time.time >= nextFireTime)
         {
-            // Shoot();
+            Shoot();
             nextFireTime = Time.time + fireRate;
         }
     }

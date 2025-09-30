@@ -1,10 +1,12 @@
 using UnityEngine;
+using System.Collections; 
 
 public class MoveEnemySystem : MonoBehaviour
 {
     private Rigidbody2D rb;
 
     public float speed = 5f;
+    public float maxSpeed = 5f;
 
     public Transform groundCheck; // Point de vérification du sol
     public float groundCheckRadius = 0.2f; // Rayon de détection du sol
@@ -13,9 +15,47 @@ public class MoveEnemySystem : MonoBehaviour
 
     private bool facingRight = true; // pour savoir dans quelle direction le perso regarde
 
-    void Awake()
+    DetectionSystem detection;
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        detection = GetComponent<DetectionSystem>();
+    }
+
+    private void OnEnable()
+    {
+        if (detection != null)
+        {
+            detection.OnPlayerDetected += HandlePlayerDetected;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (detection != null)
+        {
+            detection.OnPlayerDetected -= HandlePlayerDetected;
+        }
+    }
+
+    private void HandlePlayerDetected(Transform player)
+    {
+        // Si le joueur est de l'autre côté
+        if (
+            (player.position.x > transform.position.x && !facingRight)
+            || (player.position.x < transform.position.x && facingRight)
+        )
+        {
+            Flip();
+            StartCoroutine(IncreaseSpeedDelay(0.5f));
+        }
+    }
+    private IEnumerator IncreaseSpeedDelay(float delay)
+    {
+        speed = 1.5f;
+        yield return new WaitForSeconds(delay);
+        speed = maxSpeed;
     }
 
     void Patrol()
