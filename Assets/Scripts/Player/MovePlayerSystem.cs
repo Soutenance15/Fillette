@@ -5,6 +5,8 @@ public class MovePlayerSystem : MonoBehaviour
     private float speed = 5f;
     private float acceleration = 50f;
 
+    private bool facingRight = true; // pour savoir dans quelle direction le perso regarde
+
     private Rigidbody2D rb;
 
     void Awake()
@@ -29,5 +31,19 @@ public class MovePlayerSystem : MonoBehaviour
             ),
             rb.linearVelocity.y
         );
+
+        // Flip si on change de direction
+        if (inputX > 0 && !facingRight)
+            Flip();
+        else if (inputX < 0 && facingRight)
+            Flip();
+    }
+
+    private void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 }
