@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
     public float currentHealth = 50f;
     public float maxHealth = 50f;
+
+    public event Action OnDie;
 
     public void TakeDamage(float damage)
     {
@@ -17,8 +20,6 @@ public class HealthSystem : MonoBehaviour
 
     void Die()
     {
-        Debug.LogWarning("DIE");
-        //TODO
-        // Envoie evenement Die
+        OnDie?.Invoke();
     }
 }

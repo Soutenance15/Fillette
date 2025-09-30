@@ -55,6 +55,24 @@ public class LocomotionSystem : MonoBehaviour
                 jetRecoverySpeed * Time.deltaTime
             );
         }
+        if (Input.GetKeyDown(KeyCode.S)) // ou "DownArrow"
+        {
+            // Détecter la plateforme sous le joueur
+            RaycastHit2D hit = Physics2D.Raycast(
+                transform.position,
+                Vector2.down,
+                1f,
+                LayerMask.GetMask("OneWayPlatform")
+            );
+            // if (hit.collider != null)
+            // {
+            //     OneWayPlatform platform = hit.collider.GetComponent<OneWayPlatform>();
+            //     if (platform != null)
+            //     {
+            //         platform.DisableCollisionTemporarily(playerCollider, dropTime);
+            //     }
+            // }
+        }
         velocity = rb.linearVelocity;
     }
 

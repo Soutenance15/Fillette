@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     [Header("Spawn / Checkpoints")]
-    public Transform initialSpawnPoint; // position de départ du joueur
+    public Vector2 initialSpawnPoint; // position de départ du joueur
     private Transform currentCheckpoint;
+    private CheckPoint[] checkpoints;
 
     private GameObject player;
     private HealthSystem playerHealth;
@@ -19,24 +21,59 @@ public class LevelManager : MonoBehaviour
             playerHealth = player.GetComponent<HealthSystem>();
             playerLocomotion = player.GetComponent<LocomotionSystem>();
 
-            // Position initiale
-            // RespawnPlayer(initialSpawnPoint.position);
+            // Sauvegarde de la position initiale
+            initialSpawnPoint = player.transform.position;
         }
 
-        // Le checkpoint initial est le spawn
-        currentCheckpoint = initialSpawnPoint;
+        checkpoints = Object.FindObjectsByType<CheckPoint>(FindObjectsSortMode.None);
+
+        // Le checkpoint initial reste null, on utilisera initialSpawnPoint si aucun checkpoint n’est touché
+    }
+
+    void OnEnable()
+    {
+        if (playerHealth != null)
+            playerHealth.OnDie += HandleDeath;
+
+        foreach (CheckPoint checkPoint in checkpoints)
+        {
+            checkPoint.OnCheckpointEnter += HandleCheckPoint; // ✅ juste la référence, pas ()
+        }
+    }
+
+    void OnDisable()
+    {
+        if (playerHealth != null)
+            playerHealth.OnDie -= HandleDeath;
+
+        foreach (CheckPoint checkPoint in checkpoints)
+        {
+            checkPoint.OnCheckpointEnter -= HandleCheckPoint;
+        }
+    }
+
+    void HandleDeath()
+    {
+        // si aucun checkpoint, respawn sur initialSpawnPoint
+        Vector3 spawnPos = currentCheckpoint != null ? currentCheckpoint.position : initialSpawnPoint;
+        RespawnPlayer(spawnPos);
     }
 
     void Update()
     {
-        // if (playerHealth != null && playerHealth.currentHealth <= 0f)
-        // {
-        //     RespawnPlayer(currentCheckpoint.position);
-        // }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Reload();
+        }
+    }
+
+    void Reload()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // Appelé pour changer le checkpoint quand le joueur atteint un point spécifique
-    public void SetCheckpoint(Transform checkpoint)
+    public void HandleCheckPoint(Transform checkpoint)
     {
         currentCheckpoint = checkpoint;
     }
@@ -47,9 +84,7 @@ public class LevelManager : MonoBehaviour
         player.transform.position = spawnPosition;
 
         if (playerHealth != null)
-        {
             playerHealth.currentHealth = playerHealth.maxHealth;
-        }
 
         if (playerLocomotion != null)
         {
