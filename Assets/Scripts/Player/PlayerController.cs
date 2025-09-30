@@ -2,14 +2,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private MovePlayerSystem movePlayerSystem;
+    public MovePlayerSystem movePlayerSystem;
+    public HealthSystem healthSystem;
 
     void Awake()
     {
         movePlayerSystem = GetComponent<MovePlayerSystem>();
-        if (movePlayerSystem != null)
-        {
-            // Debug.Log("movePlayerSystem exists");
-        }
+        healthSystem = GetComponent<HealthSystem>();
+        // if (movePlayerSystem != null)
+        // {
+        //     Debug.Log("movePlayerSystem exists");
+        // }
+
+
     }
 }

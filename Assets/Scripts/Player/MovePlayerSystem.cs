@@ -46,4 +46,10 @@ public class MovePlayerSystem : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
+
+    public void PushMe(Vector2 fromDirection, float pushForce)
+    {
+        // Applique une force dans la direction opposée à l'ennemi
+        rb.AddForce(fromDirection.normalized * pushForce, ForceMode2D.Impulse);
+    }
 }
