@@ -56,7 +56,7 @@ public class LocomotionSystem : MonoBehaviour
                 jetRecoverySpeed * Time.deltaTime
             );
         }
-        if (Input.GetKeyDown(KeyCode.S)) // ou "DownArrow"
+        if (Input.GetKeyDown(KeyCode.DownArrow)) // ou "DownArrow"
         {
             // Détecter la plateforme sous le joueur
             RaycastHit2D hit = Physics2D.Raycast(
@@ -94,14 +94,18 @@ public class LocomotionSystem : MonoBehaviour
 
     private void Jump()
     {
+        if (!enableJump || enableJet)
+            return;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
     private void Jet()
     {
+        if (enableJump || !enableJet)
+            return;
         // Mode Ctrl : faible poussée mais visible
-        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.E))
         {
             // currentJetForce = jetStableForce;
             currentJetForce = Mathf.MoveTowards(

@@ -45,9 +45,9 @@ public class Projectile : MonoBehaviour
 
         Debug.Log(other);
 
-        if (shooterType == "Player" && other.GetComponent<GunnerEnemy>() != null)
+        if (shooterType == "Player" && other.GetComponent<Enemy>() != null)
         {
-            GunnerEnemy enemy = other.GetComponent<GunnerEnemy>();
+            Enemy enemy = other.GetComponent<Enemy>();
             HealthSystemEnemy heathEnemy = enemy.GetComponent<HealthSystemEnemy>();
             if (heathEnemy != null)
             {
