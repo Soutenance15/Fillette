@@ -9,6 +9,9 @@ public class AttackSystem : MonoBehaviour
     private Transform firePoint;
 
     [SerializeField]
+    private float damage = 12.5f;
+
+    [SerializeField]
     private float fireRate = 1f;
     private float nextAttackTime = 0f;
 
@@ -77,6 +80,7 @@ public class AttackSystem : MonoBehaviour
                 direction = -1f;
             }
             projectile.SetDirection(direction);
+            projectile.SetDamage(damage);
         }
     }
 }

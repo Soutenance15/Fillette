@@ -13,6 +13,7 @@ public class LocomotionSystem : MonoBehaviour
     public LayerMask groundLayerMask;
 
     [Header("Jet Settings")]
+    public bool hasJet = false;
     public bool enableJet = true;
     public float jetForceMax = 0.25f; // poussée max au début
     public float jetForceMin = 0.05f; // poussée minimale (fin de poussée)

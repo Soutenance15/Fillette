@@ -55,7 +55,8 @@ public class LevelManager : MonoBehaviour
     void HandleDeath()
     {
         // si aucun checkpoint, respawn sur initialSpawnPoint
-        Vector3 spawnPos = currentCheckpoint != null ? currentCheckpoint.position : initialSpawnPoint;
+        Vector3 spawnPos =
+            currentCheckpoint != null ? currentCheckpoint.position : initialSpawnPoint;
         RespawnPlayer(spawnPos);
     }
 
@@ -76,6 +77,8 @@ public class LevelManager : MonoBehaviour
     public void HandleCheckPoint(Transform checkpoint)
     {
         currentCheckpoint = checkpoint;
+        if (playerHealth != null)
+            playerHealth.currentHealth = playerHealth.maxHealth;
     }
 
     // Respawn du joueur au checkpoint ou au spawn initial

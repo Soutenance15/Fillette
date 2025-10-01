@@ -66,4 +66,9 @@ public class Projectile : MonoBehaviour
             }
         }
     }
+
+    public void SetDamage(float damage)
+    {
+        this.damage = damage;
+    }
 }

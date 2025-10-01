@@ -1,8 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class FuelJet : MonoBehaviour
 {
     public float amountFuel = 50f;
+    public float disableDuration = 8f; // durée pendant laquelle le GameObject est désactivé
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -13,8 +15,14 @@ public class FuelJet : MonoBehaviour
             {
                 loco.FillFuelJet(amountFuel);
             }
-
-            Destroy(gameObject);
+            StartCoroutine(DisableRoutine());
         }
+    }
+
+    private IEnumerator DisableRoutine()
+    {
+        gameObject.SetActive(false); // désactive le GameObject
+        yield return new WaitForSeconds(disableDuration); // attend
+        gameObject.SetActive(true); // réactive le GameObject
     }
 }

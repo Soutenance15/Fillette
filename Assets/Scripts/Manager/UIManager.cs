@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public GameObject pausePanel; // Assigné dans l'inspecteur
+    public GameObject takeJetPackPanel; // Assigné dans l'inspecteur
+    public Button closeJetPackButton; // assigne le bouton dans le code
 
     // HUD
     [Header("Locomotion")]
@@ -24,6 +26,49 @@ public class UIManager : MonoBehaviour
         if (playerHealth == null)
         {
             Debug.LogWarning("UIManager : Player HealthSystem non assigné !");
+        }
+
+        if (takeJetPackPanel != null)
+        {
+            takeJetPackPanel.SetActive(false);
+        }
+        if (closeJetPackButton != null)
+        {
+            closeJetPackButton.onClick.AddListener(closeJetPackPanel);
+        }
+    }
+
+    void OnEnable()
+    {
+        JetPack.TakeJetPack += ShowPanelTakeJetPack;
+        if (closeJetPackButton != null)
+        {
+            closeJetPackButton.onClick.AddListener(closeJetPackPanel);
+        }
+    }
+
+    void OnDisable()
+    {
+        JetPack.TakeJetPack -= ShowPanelTakeJetPack;
+        if (closeJetPackButton != null)
+        {
+            closeJetPackButton.onClick.RemoveListener(closeJetPackPanel);
+        }
+    }
+
+    void ShowPanelTakeJetPack()
+    {
+        if (takeJetPackPanel != null)
+        {
+            takeJetPackPanel.SetActive(true);
+        }
+    }
+
+    private void closeJetPackPanel()
+    {
+        if (takeJetPackPanel != null)
+        {
+            takeJetPackPanel.SetActive(false);
         }
     }
 
