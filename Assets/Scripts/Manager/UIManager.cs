@@ -77,22 +77,27 @@ public class UIManager : MonoBehaviour
         // Locomotion
         if (playerLocomotion != null)
         {
-            fuelSlider.value = playerLocomotion.currentFuel / playerLocomotion.maxFuel;
+            if (fuelSlider != null && jetSlider != null)
+            {
+                fuelSlider.value = playerLocomotion.currentFuel / playerLocomotion.maxFuel;
 
-            float normalizedJet = Mathf.InverseLerp(
-                0f,
-                playerLocomotion.jetSpeedMax,
-                playerLocomotion.velocity.y
-            ); // normalisation pour slider
-            jetSlider.value = normalizedJet;
+                float normalizedJet = Mathf.InverseLerp(
+                    0f,
+                    playerLocomotion.jetSpeedMax,
+                    playerLocomotion.velocity.y
+                ); // normalisation pour slider
+                jetSlider.value = normalizedJet;
+            }
         }
 
         // Health
         if (playerHealth != null)
         {
-            Debug.Log("Health:" + playerHealth.currentHealth);
-            float normalizedHealth = playerHealth.currentHealth / playerHealth.maxHealth;
-            healthSlider.value = normalizedHealth;
+            if (healthSlider != null)
+            {
+                float normalizedHealth = playerHealth.currentHealth / playerHealth.maxHealth;
+                healthSlider.value = normalizedHealth;
+            }
         }
     }
 
