@@ -37,6 +37,16 @@ public class AttackSystem : MonoBehaviour
 
     private void HandlePlayerDetected(Transform player)
     {
+        // Vérifie que l’ennemi est orienté vers le joueur
+        bool facingRight = transform.localScale.x > 0;
+        if (
+            (player.position.x > transform.position.x && !facingRight)
+            || (player.position.x < transform.position.x && facingRight)
+        )
+        {
+            // L’ennemi n’est pas orienté correctement → ne rien faire
+            return;
+        }
         if (Time.time >= nextAttackTime)
         {
             if (firePoint != null)

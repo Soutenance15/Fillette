@@ -8,7 +8,8 @@ public class LocomotionSystem : MonoBehaviour
     public bool enableJump = true;
     public float jumpForce = 10f;
     public Transform groundCheck;
-    public float groundDistance = 0.2f;
+    public Transform groundCheck2;
+    public float groundRadius = 0.5f;
     public LayerMask groundLayerMask;
 
     [Header("Jet Settings")]
@@ -138,11 +139,9 @@ public class LocomotionSystem : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.Raycast(
-            groundCheck.position,
-            Vector2.down,
-            groundDistance,
-            groundLayerMask
+        return (
+            Physics2D.Raycast(groundCheck.position, Vector2.down, groundRadius, groundLayerMask)
+            || Physics2D.Raycast(groundCheck2.position, Vector2.down, groundRadius, groundLayerMask)
         );
     }
 }

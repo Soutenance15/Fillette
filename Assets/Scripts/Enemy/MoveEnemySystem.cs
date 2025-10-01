@@ -49,7 +49,13 @@ public class MoveEnemySystem : MonoBehaviour
 
     private void HandlePlayerDetected(Transform player)
     {
-        // Si le joueur est de l'autre côté
+        float yDiff = Mathf.Abs(player.position.y - transform.position.y);
+
+        // Vérifie que le joueur est sur la même plateforme (ou presque)
+        if (yDiff > 0.5f)
+            return;
+
+        // Vérifie la direction avant de flip
         if (
             (player.position.x > transform.position.x && !facingRight)
             || (player.position.x < transform.position.x && facingRight)

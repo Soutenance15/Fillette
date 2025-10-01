@@ -14,7 +14,7 @@ public class HealthSystem : MonoBehaviour
         if (currentHealth <= 0f)
         {
             currentHealth = 0;
-            Die();
+            // Die();
         }
     }
 
